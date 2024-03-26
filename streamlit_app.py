@@ -33,11 +33,10 @@ if ingredients_list:
 
     for fruit_chosen in ingredients_list:
         ingredients_string += fruit_chosen + ' '
+        fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+        fv_df = st.dataframe(data=fruityvice_response.json(), use_container_width=True)
 
     st.write(ingredients_string)
-
-    fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
-    fv_df = st.dataframe(data=fruityvice_response.json(), use_container_width=True)
     
     #Create an insert statement to insert the selected fruits to the orders table
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients, name_on_order)
